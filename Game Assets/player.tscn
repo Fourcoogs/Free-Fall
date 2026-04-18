@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://ciofm4eq47ovj"]
+
+[ext_resource type="Script" uid="uid://bqyslbcnocvfj" path="res://Game Assets/player.gd" id="1_w8p6e"]
+[ext_resource type="Texture2D" uid="uid://j0p8pds1nfhn" path="res://Art Assets/Dictator.png" id="2_grxpr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_splke"]
+atlas = ExtResource("2_grxpr")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aloqr"]
+atlas = ExtResource("2_grxpr")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1shjd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_splke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aloqr")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_grxpr"]
+radius = 12.0416
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_w8p6e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 4.71239
+sprite_frames = SubResource("SpriteFrames_1shjd")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_grxpr")
