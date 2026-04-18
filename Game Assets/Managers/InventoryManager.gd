@@ -10,7 +10,7 @@ static var Instance: InventoryManager:
 
 #projectile prefabs
 var packedSmokeBomb: PackedScene = preload("res://Game Assets/Projectiles/smoke_bomb.tscn")
-
+var packedKnife: PackedScene = preload("res://Game Assets/Projectiles/knife.tscn")
 
 #items
 var _smokeBombs: int = 0
@@ -118,7 +118,7 @@ func UseItem(type: Items):
 		Items.Knife:
 			if knivesHeld > 0:
 				knivesHeld -= 1
-				return true
+				return packedKnife.instantiate()
 			return false
 	return false
 

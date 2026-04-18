@@ -297,6 +297,7 @@ animations = [{
 }]
 
 [node name="Enemy" type="CharacterBody2D"]
+disable_mode = 2
 collision_layer = 4
 collision_mask = 23
 motion_mode = 1

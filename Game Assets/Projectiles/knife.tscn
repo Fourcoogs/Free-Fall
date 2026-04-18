@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyephq8f6s1bj"]
+
+[ext_resource type="Script" uid="uid://c0k8pl4s68vqq" path="res://Game Assets/Projectiles/knife.gd" id="1_j5534"]
+[ext_resource type="Texture2D" uid="uid://cg1emokdecrqh" path="res://Art Assets/Knife.png" id="1_r1jlq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j5534"]
+radius = 6.32456
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 6
+collision_mask = 6
+script = ExtResource("1_j5534")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_j5534")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 4.71239
+texture = ExtResource("1_r1jlq")
+
+[connection signal="body_entered" from="." to="." method="HitEnemy"]

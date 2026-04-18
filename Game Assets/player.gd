@@ -8,6 +8,7 @@ var attack_ready: bool = true
 #var is_unarmed: bool
 @export var speed: float = 10000
 #var pickups: Array = []
+var smoked: bool = false
 var alive: bool = true
 var punchRight: bool = true
 
@@ -70,10 +71,9 @@ func ThrowItem():
 	var instance = InventoryManager.Instance
 	var item = instance.UseItem(selectedItem)
 	if item is Node2D:
-		if item is SmokeBomb:
-			item.rotation = rotation
-			get_parent().add_child(item)
-			item.position = position
+		item.rotation = rotation
+		get_parent().add_child(item)
+		item.position = position
 
 func ReadyAttack():
 	attack_ready = true
@@ -96,6 +96,3 @@ func damage(amount: int):
 		health -= amount
 		if health <= 0:
 			alive = false
-
-func equip():
-	pass

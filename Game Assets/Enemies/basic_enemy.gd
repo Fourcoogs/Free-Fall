@@ -16,6 +16,7 @@ var isMoving: bool = false
 var player: Node2D
 var playerInView: bool = false
 var canAttack: bool = true
+var smoked: bool = false
 
 enum states
 {
@@ -116,6 +117,12 @@ func ChangeState(newState: states):
 		states.Downed:
 			$AnimatedSprite2D.play("Downed")
 			$SleepTimer.start()
+		states.Dead:
+			$AnimatedSprite2D.play("Dead")
+			$Polygon2D.visible = false
+			$CollisionShape2D.disabled = true
+			$Area2D.monitorable = false
+			$Area2D.monitoring = false
 
 func AlertFinished():
 	ChangeState(states.Hunt)
@@ -145,9 +152,9 @@ func PlayerLost(body: Node2D):
 
 func PlayerSearch():
 	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position, 1 << 1)
+	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position, 1 << 1 || 1 << 5)
 	var result = space_state.intersect_ray(query)
-	if !result:
+	if !result && !smoked && player.smoked == false:
 		if aiState == states.Patrol:
 			ChangeState(states.Alert)
 		if aiState == states.Hunt:
@@ -171,3 +178,6 @@ func Movement(delta: float):
 func _physics_process(delta: float) -> void:
 	Movement(delta)
 	move_and_slide()
+
+func KillEnemy():
+	ChangeState(states.Dead)
