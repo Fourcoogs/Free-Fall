@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://covuhoql67q4p"]
+
+[ext_resource type="PackedScene" uid="uid://2tqblev4lfi6" path="res://Game Assets/Pickups/basic_pickup.tscn" id="1_drp1s"]
+[ext_resource type="Texture2D" uid="uid://cg1emokdecrqh" path="res://Art Assets/Knife.png" id="2_b2etp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvihx"]
+atlas = ExtResource("2_b2etp")
+
+[node name="Knife" instance=ExtResource("1_drp1s")]
+itemType = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+texture = SubResource("AtlasTexture_cvihx")

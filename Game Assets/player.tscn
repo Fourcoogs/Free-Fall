@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ciofm4eq47ovj"]
+[gd_scene load_steps=8 format=3 uid="uid://ciofm4eq47ovj"]
 
 [ext_resource type="Script" uid="uid://bqyslbcnocvfj" path="res://Game Assets/player.gd" id="1_w8p6e"]
 [ext_resource type="Texture2D" uid="uid://j0p8pds1nfhn" path="res://Art Assets/Dictator.png" id="2_grxpr"]
+[ext_resource type="PackedScene" uid="uid://ccaxleulx04p2" path="res://Game Assets/UI/HUD/player_hud.tscn" id="3_splke"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_splke"]
 atlas = ExtResource("2_grxpr")
@@ -39,3 +40,9 @@ animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_grxpr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource("3_splke")]

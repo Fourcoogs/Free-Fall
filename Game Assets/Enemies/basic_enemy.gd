@@ -29,7 +29,7 @@ var aiState: states = states.Patrol
 func _ready():
 	if (is_instance_valid(currentWaypoint)):
 		isMoving = true
-	LevelManager.Instance.OnGridReady.connect(GetTileAndGrid)
+	Level.Instance.OnGridReady.connect(GetTileAndGrid)
 	pass
 	
 func GetTileAndGrid(tilemap, aStarGrid):

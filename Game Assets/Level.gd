@@ -1,8 +1,8 @@
 extends Node2D
-class_name LevelManager
+class_name Level
 
-static var _instance: LevelManager
-static var Instance: LevelManager:
+static var _instance: Level
+static var Instance: Level:
 	get:
 		return _instance
 

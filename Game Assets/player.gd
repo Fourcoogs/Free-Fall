@@ -11,7 +11,11 @@ var alive: bool = true
 
 func _ready():
 	health = max_health
+	InventoryManager.Instance.OnHealPlayer.connect(HealPlayer)
 	pass
+
+func HealPlayer():
+	health += 1
 
 func _process(delta: float) -> void:
 	if alive:

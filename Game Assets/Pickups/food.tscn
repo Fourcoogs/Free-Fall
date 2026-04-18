@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://db1ihvot2k5bh"]
+
+[ext_resource type="PackedScene" uid="uid://2tqblev4lfi6" path="res://Game Assets/Pickups/basic_pickup.tscn" id="1_2ja5f"]
+[ext_resource type="Texture2D" uid="uid://b7x0ja4nfy2jp" path="res://Art Assets/Bread.png" id="2_rwjgc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2me6d"]
+atlas = ExtResource("2_rwjgc")
+
+[node name="Food" instance=ExtResource("1_2ja5f")]
+itemType = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+texture = SubResource("AtlasTexture_2me6d")

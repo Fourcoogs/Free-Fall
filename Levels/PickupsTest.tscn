@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://oeekoyvtl32b"]
+
+[ext_resource type="PackedScene" uid="uid://ciofm4eq47ovj" path="res://Game Assets/player.tscn" id="1_e66xa"]
+[ext_resource type="PackedScene" uid="uid://cfxa23llsw2hk" path="res://Game Assets/Pickups/key.tscn" id="2_m8vx6"]
+[ext_resource type="PackedScene" uid="uid://cncwkcx64fafs" path="res://Game Assets/Pickups/smoke_bomb.tscn" id="3_m8vx6"]
+
+[node name="PickupsTest" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_e66xa")]
+position = Vector2(82, 42)
+
+[node name="Key" parent="." instance=ExtResource("2_m8vx6")]
+position = Vector2(289, 51)
+
+[node name="Smoke Bomb" parent="." instance=ExtResource("3_m8vx6")]
+position = Vector2(84, 147)

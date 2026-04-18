@@ -1,0 +1,76 @@
+[gd_scene load_steps=12 format=3 uid="uid://cfxa23llsw2hk"]
+
+[ext_resource type="PackedScene" uid="uid://2tqblev4lfi6" path="res://Game Assets/Pickups/basic_pickup.tscn" id="1_gtysp"]
+[ext_resource type="Texture2D" uid="uid://dp1bl8gbkdx6i" path="res://Art Assets/Key_Sparkle.png" id="2_4jfox"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6r00"]
+atlas = ExtResource("2_4jfox")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0b41"]
+atlas = ExtResource("2_4jfox")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_av4sj"]
+atlas = ExtResource("2_4jfox")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b86ol"]
+atlas = ExtResource("2_4jfox")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a34h0"]
+atlas = ExtResource("2_4jfox")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8s0fn"]
+atlas = ExtResource("2_4jfox")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfs5h"]
+atlas = ExtResource("2_4jfox")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nh5u"]
+atlas = ExtResource("2_4jfox")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jp7wb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6r00")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p0b41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_av4sj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b86ol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a34h0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8s0fn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfs5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nh5u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Key" instance=ExtResource("1_gtysp")]
+itemType = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_jp7wb")
+autoplay = "default"
+frame_progress = 0.925046

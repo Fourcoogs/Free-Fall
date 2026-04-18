@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://7feeghqxs6w4"]
+
+[ext_resource type="PackedScene" uid="uid://2tqblev4lfi6" path="res://Game Assets/Pickups/basic_pickup.tscn" id="1_j52tb"]
+[ext_resource type="Texture2D" uid="uid://e1jwxny527ln" path="res://Art Assets/Noise_Maker.png" id="2_uphu3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdkl5"]
+atlas = ExtResource("2_uphu3")
+
+[node name="Lure" instance=ExtResource("1_j52tb")]
+itemType = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+texture = SubResource("AtlasTexture_fdkl5")

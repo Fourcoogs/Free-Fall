@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://ndh8gm605rwe"]
 
 [ext_resource type="PackedScene" uid="uid://dwlqeho6yk116" path="res://Game Assets/Enemies/basic_enemy.tscn" id="1_srgx4"]
-[ext_resource type="Script" uid="uid://bn0vssxrdqt0j" path="res://Game Assets/Managers/LevelManager.gd" id="1_t3rny"]
+[ext_resource type="Script" uid="uid://bn0vssxrdqt0j" path="res://Game Assets/Level.gd" id="1_t3rny"]
 [ext_resource type="Texture2D" uid="uid://da7bx3nmneniw" path="res://Art Assets/Dictator_Punch_Right.png" id="2_r47r2"]
 [ext_resource type="PackedScene" uid="uid://b73kbmeop3uj1" path="res://Game Assets/waypoint.tscn" id="2_t3rny"]
 
