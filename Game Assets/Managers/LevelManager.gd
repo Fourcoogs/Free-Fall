@@ -1,7 +1,7 @@
 extends Node
 class_name LevelManager
 
-var currentLevel = 0
+var currentLevel = -1
 var preloadedLevelArray = null
 
 static var _instance: LevelManager
@@ -20,9 +20,15 @@ func _init():
 func _ready() -> void:
 	pass#LEVEL_1_SCENE = preload("res://Levels/level_2.tscn")
 
+func Reset():
+	preloadedLevelArray = ["res://Levels/level_1.tscn",
+	"res://Levels/level_2.tscn", "res://Levels/level_3.tscn","res://Levels/level_4.tscn"]
+	
+	Engine.get_main_loop().change_scene_to_file(preloadedLevelArray[currentLevel])
+
 func nextLevel():
 	preloadedLevelArray = ["res://Levels/level_1.tscn",
-	"res://Levels/level_2.tscn", "res://Levels/level_3.tscn"]
+	"res://Levels/level_2.tscn", "res://Levels/level_3.tscn","res://Levels/level_4.tscn"]
 	
 	currentLevel = currentLevel + 1
 	
