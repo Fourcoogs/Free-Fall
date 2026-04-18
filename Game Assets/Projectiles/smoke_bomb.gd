@@ -7,7 +7,7 @@ class_name SmokeBomb
 @export var direction: Vector2
 
 func _process(delta: float) -> void:
-	rotation += spinningSpeed * delta
+	$Sprite2D.rotation += spinningSpeed * delta
 	pass
 
 func Detonate(_body):
@@ -17,4 +17,4 @@ func Detonate(_body):
 	queue_free()
 
 func _physics_process(delta: float):
-	position += direction * (speed * delta)
+	position += Vector2(cos(rotation), sin(rotation)) * speed * delta

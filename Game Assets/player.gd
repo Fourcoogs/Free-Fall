@@ -68,11 +68,12 @@ func ThrowItem():
 	attack_ready = false
 	$AttackCooldown.start()
 	var instance = InventoryManager.Instance
-	var item = instance.useItem(selectedItem)
+	var item = instance.UseItem(selectedItem)
 	if item is Node2D:
 		if item is SmokeBomb:
-			item.direction = Vector2()
-			pass
+			item.rotation = rotation
+			get_parent().add_child(item)
+			item.position = position
 
 func ReadyAttack():
 	attack_ready = true
