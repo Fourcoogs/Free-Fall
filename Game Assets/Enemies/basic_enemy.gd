@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var patrolSpeed: float = 50
 @export var huntSpeed: float = 90
 @export var currentWaypoint: Waypoint
+@export var bullet: PackedScene
 
 var currentSpeed: float
 var alive: bool = true
@@ -16,6 +17,7 @@ var isMoving: bool = false
 var player: Node2D
 var playerInView: bool = false
 var canAttack: bool = true
+var smoked: bool = false
 
 enum states
 {
@@ -60,11 +62,11 @@ func Patrol():
 				isMoving = false
 				return
 			if pathCompleted:
-				print("destination reached")
+				#print("destination reached")
 				currentWaypoint = currentWaypoint.nextWaypoint
 				pathCompleted = false
 			else:
-				print("plotting")
+				#print("plotting")
 				currentPath = Level.Instance.PlotToPosition(position, currentWaypoint.position)
 				target = Level.Instance.MapToLocal(currentPath[0])
 
@@ -81,6 +83,10 @@ func Attack():
 
 func FireAttack():
 	print("pew!")
+	var bulletNode = bullet.instantiate()
+	get_parent().add_child(bulletNode)
+	bulletNode.rotation = rotation
+	bulletNode.position = position
 	canAttack = false
 	$AttackTimer.start()
 
@@ -116,6 +122,12 @@ func ChangeState(newState: states):
 		states.Downed:
 			$AnimatedSprite2D.play("Downed")
 			$SleepTimer.start()
+		states.Dead:
+			$AnimatedSprite2D.play("Dead")
+			$Polygon2D.visible = false
+			$CollisionShape2D.disabled = true
+			$Area2D.monitorable = false
+			$Area2D.monitoring = false
 
 func AlertFinished():
 	ChangeState(states.Hunt)
@@ -144,10 +156,12 @@ func PlayerLost(body: Node2D):
 	playerInView = false
 
 func PlayerSearch():
+	#print("searching")
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position, 1 << 1)
 	var result = space_state.intersect_ray(query)
-	if !result:
+	if !result && !smoked && player.smoked == false:
+		#print("targetAcquired")
 		if aiState == states.Patrol:
 			ChangeState(states.Alert)
 		if aiState == states.Hunt:
@@ -171,3 +185,6 @@ func Movement(delta: float):
 func _physics_process(delta: float) -> void:
 	Movement(delta)
 	move_and_slide()
+
+func KillEnemy():
+	ChangeState(states.Dead)

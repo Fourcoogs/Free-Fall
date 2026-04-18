@@ -14,6 +14,7 @@ func Detonate(_body):
 	if cloud != null:
 		var cloudNode = cloud.instantiate()
 		get_parent().add_child(cloudNode)
+		cloudNode.position = position
 	queue_free()
 
 func _physics_process(delta: float):

@@ -1,6 +1,7 @@
-[gd_scene load_steps=45 format=3 uid="uid://dwlqeho6yk116"]
+[gd_scene load_steps=46 format=3 uid="uid://dwlqeho6yk116"]
 
 [ext_resource type="Script" uid="uid://yb476lm0rjvr" path="res://Game Assets/Enemies/basic_enemy.gd" id="1_4nkl6"]
+[ext_resource type="PackedScene" uid="uid://brp1i1m1potpk" path="res://Game Assets/Projectiles/bullet.tscn" id="2_3llkx"]
 [ext_resource type="Texture2D" uid="uid://bbdkwwl1urhsa" path="res://Art Assets/Gun_Guard_Aim.png" id="2_13w68"]
 [ext_resource type="Texture2D" uid="uid://pqmmhybry1cb" path="res://Art Assets/Gun_Guard_Dead.png" id="3_1wm7o"]
 [ext_resource type="Texture2D" uid="uid://q06s65rmtyj7" path="res://Art Assets/Gun_Guard_Sleep.png" id="4_3llkx"]
@@ -297,10 +298,12 @@ animations = [{
 }]
 
 [node name="Enemy" type="CharacterBody2D"]
+disable_mode = 2
 collision_layer = 4
 collision_mask = 23
 motion_mode = 1
 script = ExtResource("1_4nkl6")
+bullet = ExtResource("2_3llkx")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
