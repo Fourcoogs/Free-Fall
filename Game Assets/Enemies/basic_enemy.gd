@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var patrolSpeed: float = 50
 @export var huntSpeed: float = 90
 @export var currentWaypoint: Waypoint
+@export var bullet: PackedScene
 
 var currentSpeed: float
 var alive: bool = true
@@ -82,6 +83,10 @@ func Attack():
 
 func FireAttack():
 	print("pew!")
+	var bulletNode = bullet.instantiate()
+	get_parent().add_child(bulletNode)
+	bulletNode.rotation = rotation
+	bulletNode.position = position
 	canAttack = false
 	$AttackTimer.start()
 
@@ -151,10 +156,12 @@ func PlayerLost(body: Node2D):
 	playerInView = false
 
 func PlayerSearch():
+	#print("searching")
 	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position, 1 << 1 || 1 << 5)
+	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position, 1 << 1)
 	var result = space_state.intersect_ray(query)
 	if !result && !smoked && player.smoked == false:
+		print("targetAcquired")
 		if aiState == states.Patrol:
 			ChangeState(states.Alert)
 		if aiState == states.Hunt:
