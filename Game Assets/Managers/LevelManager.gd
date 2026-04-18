@@ -31,8 +31,9 @@ func nextLevel():
 	"res://Levels/level_2.tscn", "res://Levels/level_3.tscn","res://Levels/level_4.tscn"]
 	
 	currentLevel = currentLevel + 1
-	
+
 	if currentLevel >= 0 and currentLevel < preloadedLevelArray.size():
+		print(preloadedLevelArray[currentLevel])
 		Engine.get_main_loop().change_scene_to_file(preloadedLevelArray[currentLevel])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
