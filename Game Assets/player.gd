@@ -71,7 +71,7 @@ func ThrowItem():
 	var item = instance.useItem(selectedItem)
 	if item is Node2D:
 		if item is SmokeBomb:
-			#item.direction = 
+			item.direction = Vector2()
 			pass
 
 func ReadyAttack():
