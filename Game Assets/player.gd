@@ -68,8 +68,9 @@ func ThrowItem():
 	attack_ready = false
 	$AttackCooldown.start()
 	var instance = InventoryManager.Instance
-	if instance.UseItem(selectedItem):
-		pass
+	var item = instance.useItem(selectedItem)
+	if item is Node2D:
+		item.velocity
 
 func ReadyAttack():
 	attack_ready = true

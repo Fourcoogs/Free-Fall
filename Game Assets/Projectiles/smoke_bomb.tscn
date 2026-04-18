@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3hn8asdjcjs5"]
+
+[ext_resource type="Script" uid="uid://qqsqbv1vja7f" path="res://Game Assets/Projectiles/smoke_bomb.gd" id="1_v0bx5"]
+[ext_resource type="Texture2D" uid="uid://bk8wlu11xwspb" path="res://Art Assets/Smoke_Bomb.png" id="1_yilm4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v0bx5"]
+radius = 7.07107
+
+[node name="Smoke Bomb" type="Area2D"]
+collision_layer = 6
+collision_mask = 6
+script = ExtResource("1_v0bx5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yilm4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_v0bx5")
+
+[connection signal="body_entered" from="." to="." method="Detonate"]

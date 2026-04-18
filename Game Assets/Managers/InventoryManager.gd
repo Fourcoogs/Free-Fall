@@ -8,6 +8,10 @@ static var Instance: InventoryManager:
 			_instance = InventoryManager.new()
 		return _instance
 
+#projectile prefabs
+var packedSmokeBomb: PackedScene = preload("res://Game Assets/Projectiles/smoke_bomb.tscn")
+
+
 #items
 var _smokeBombs: int = 0
 var smokeBombsHeld: int:
@@ -104,7 +108,7 @@ func UseItem(type: Items):
 		Items.SmokeBomb:
 			if smokeBombsHeld > 0:
 				smokeBombsHeld -= 1
-				return true
+				return packedSmokeBomb.instantiate()
 			return false
 		Items.Lure:
 			if luresHeld > 0:
