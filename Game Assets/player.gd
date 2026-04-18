@@ -59,11 +59,15 @@ func Attack():
 
 func PunchLands(body: Node2D):
 	if body is Enemy:
+		DeactivatePunch()
+		$PunchDuration.stop()
 		body.damage(1)
+		#body.position += Vector2(cos(rotation), sin(rotation)) * 20
 	pass
 
 func DeactivatePunch():
 	$PunchArea.monitoring = false
+	$PunchArea.monitorable = false
 
 func ThrowItem():
 	attack_ready = false
@@ -97,3 +101,6 @@ func damage(amount: int):
 		if health <= 0:
 			alive = false
 			$AnimatedSprite2D.play("Dead")
+
+func Fall():
+	queue_free()
