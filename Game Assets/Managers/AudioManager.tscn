@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt0w0eua4wq86"]
+
+[ext_resource type="AudioStream" uid="uid://cgtlxtim6qin4" path="res://whatever/sneakyFantasy Edit 1 Export 2.mp3" id="1_ebbmu"]
+
+[sub_resource type="GDScript" id="GDScript_64xxj"]
+script/source = "extends AudioStreamPlayer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_ebbmu")
+parameters/looping = true
+script = SubResource("GDScript_64xxj")
