@@ -13,6 +13,7 @@ var currentPath: Array
 var pathCompleted: bool
 var target: Vector2
 var isMoving: bool = false
+var player: Node2D
 
 enum states
 {
@@ -38,6 +39,8 @@ func _process(delta: float) -> void:
 			return
 		states.Patrol:
 			Patrol()
+		states.Alert:
+			Alert()
 		states.Hunt:
 			Hunt()
 		states.Attack:
@@ -60,6 +63,9 @@ func Patrol():
 				currentPath = Level.Instance.PlotToPosition(position, currentWaypoint.position)
 				target = Level.Instance.MapToLocal(currentPath[0])
 
+func Alert():
+	look_at(player.position)
+
 func Hunt():
 	pass
 
@@ -74,17 +80,35 @@ func ChangeState(newState: states):
 				currentPath = Level.Instance.PlotToPosition(position, currentWaypoint.position)
 				target = Level.Instance.MapToLocal(currentPath[0])
 				currentSpeed = patrolSpeed
+		states.Alert:
+			currentPath.clear()
+			$AlertArrow.play()
+			$AnimatedSprite2D.pause()
+			pass
+		states.Hunt:
+			pass
+
+func AlertFinished():
+	ChangeState(states.Hunt)
 
 func damage(amount, type, angle):
 	health -= amount
 	if health <= 0:
-		aiState = states.Dead
+		ChangeState(states.Dead)
+
+func PlayerSpotted(body: Node2D):
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsRayQueryParameters2D.create(global_position, body.global_position, 1 << 1)
+	var result = space_state.intersect_ray(query)
+	if !result:
+		#currentPath.clear()
+		player = body
+		ChangeState(states.Alert)
+	pass
 
 func Movement(delta: float):
 	if !currentPath.is_empty():
-		#print("path is not empty")
-		#var target: Vector2 = Level.Instance.MapToLocal(currentPath[0])
-		#print (str(position) + " -> " + str(position.move_toward(target, currentSpeed * delta)) + " => " + str(target))
+		look_at(target)
 		position = position.move_toward(target, currentSpeed * delta)
 		if (position == target):
 			currentPath.pop_front()
@@ -93,35 +117,6 @@ func Movement(delta: float):
 				return
 			target = Level.Instance.MapToLocal(currentPath[0])
 	pass
-
-func HuntMovement(delta: float):
-	push_error("HuntMovement not programmed")
-	pass
-
-#func CustomMoveToward(target: Vector2, speed: float):
-	#if position == target:
-		#return
-	#var direction = position.direction_to(target)
-	#var lower: bool = false
-	#var righter: bool = false
-	#if position.x > target.x:
-		#righter = true
-	#if position.y > target.y:
-		#lower = true
-	#position += direction * speed
-	#if lower:
-		#if position.y <= target.y:
-			#position.y = target.y
-	#else:
-		#if position.y >= target.y:
-			#position.y = target.y
-	#if righter:
-		#if position.x <= target.x:
-			#position.x = target.x
-	#else:
-		#if position.x >= target.x:
-			#position.x = target.x 
-	#pass
 
 func _physics_process(delta: float) -> void:
 	Movement(delta)

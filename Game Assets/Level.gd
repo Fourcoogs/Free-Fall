@@ -6,7 +6,7 @@ static var Instance: Level:
 	get:
 		return _instance
 
-@export var tileMap: TileMapLayer
+var tileMap: TileMapLayer
 var grid: AStarGrid2D
 
 signal OnGridReady(mapValue: TileMapLayer, gridValue: AStarGrid2D)
@@ -15,12 +15,21 @@ func _init():
 	_instance = self
 
 func _ready():
+	tileMap = $TileMapLayer
 	grid = AStarGrid2D.new()
 	var usedRect = tileMap.get_used_rect()
-	grid.region = usedRect
+	grid.region = Rect2i(Vector2i.ZERO, usedRect.size * 0.32)
 	#grid.offset = usedRect.position
-	grid.cell_size = Vector2i(100, 100)
+	grid.cell_size = Vector2i(32, 32)
+	grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_MAX
 	grid.update()
+	var coords = tileMap.get_used_cells()
+	for i in coords:
+		var data = tileMap.get_cell_tile_data(i)
+		if data.get_custom_data("BlockNav"):
+			#print("setting solid")
+			grid.set_point_solid(i)
+		#print(i, grid.is_point_solid(i))
 	#OnGridReady.emit(tileMap, grid)
 
 func PlotToPosition(currentPosition:Vector2, newPosition: Vector2):
@@ -31,7 +40,7 @@ func PlotToPosition(currentPosition:Vector2, newPosition: Vector2):
 
 func MapToLocal(vector: Vector2i):
 	print(str(vector))
-	return tileMap.map_to_local(vector)
+	return to_global(tileMap.map_to_local(vector))
 
 func LocalToMap(vector: Vector2):
-	return tileMap.local_to_map(vector)
+	return tileMap.local_to_map(tileMap.to_local(vector))

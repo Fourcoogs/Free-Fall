@@ -30,6 +30,7 @@ animations = [{
 radius = 12.0416
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 31
 motion_mode = 1
 script = ExtResource("1_w8p6e")
 

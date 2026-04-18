@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dwlqeho6yk116"]
+[gd_scene load_steps=45 format=3 uid="uid://dwlqeho6yk116"]
 
 [ext_resource type="Script" uid="uid://yb476lm0rjvr" path="res://Game Assets/Enemies/basic_enemy.gd" id="1_4nkl6"]
 [ext_resource type="Texture2D" uid="uid://bbdkwwl1urhsa" path="res://Art Assets/Gun_Guard_Aim.png" id="2_13w68"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://q06s65rmtyj7" path="res://Art Assets/Gun_Guard_Sleep.png" id="4_3llkx"]
 [ext_resource type="Texture2D" uid="uid://dmxjs0urskwbe" path="res://Art Assets/Gun_Guard_Stun.png" id="5_sbnyc"]
 [ext_resource type="Texture2D" uid="uid://8fe65y5wxsea" path="res://Art Assets/Gun_Guard.png" id="6_ognml"]
+[ext_resource type="Texture2D" uid="uid://d0y3evxinspve" path="res://Art Assets/ALERT.png" id="7_1wm7o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_47fxv"]
 atlas = ExtResource("2_13w68")
@@ -262,9 +263,49 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_l3bb0"]
 radius = 12.0416
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3llkx"]
+atlas = ExtResource("7_1wm7o")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbnyc"]
+atlas = ExtResource("7_1wm7o")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ognml"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3llkx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbnyc")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_4nkl6")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(145, -69, 145, 70, 0, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.984314, 0, 0.0235294, 0.0705882)
+polygon = PackedVector2Array(0, 0, 145, -69, 145, 70)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 4.71239
@@ -273,3 +314,11 @@ animation = &"Walking"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_l3bb0")
+
+[node name="AlertArrow" type="AnimatedSprite2D" parent="."]
+rotation = 4.71239
+sprite_frames = SubResource("SpriteFrames_ognml")
+frame = 3
+frame_progress = 1.0
+
+[connection signal="body_entered" from="Area2D" to="." method="PlayerSpotted"]
