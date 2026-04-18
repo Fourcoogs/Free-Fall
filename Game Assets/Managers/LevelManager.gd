@@ -22,7 +22,7 @@ func _ready() -> void:
 
 func nextLevel():
 	preloadedLevelArray = ["res://Levels/level_1.tscn",
-	"res://Levels/level_2.tscn"]
+	"res://Levels/level_2.tscn", "res://Levels/level_3.tscn"]
 	
 	currentLevel = currentLevel + 1
 	

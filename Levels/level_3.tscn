@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2osnvddukbwh"]
+
+[ext_resource type="PackedScene" uid="uid://dgsadp215v3ph" path="res://hole.tscn" id="1_c1r31"]
+[ext_resource type="PackedScene" uid="uid://ciofm4eq47ovj" path="res://Game Assets/player.tscn" id="2_ti3gh"]
+
+[node name="level_3" type="Node2D"]
+
+[node name="Node2D" parent="." instance=ExtResource("1_c1r31")]
+position = Vector2(414, 252)
+
+[node name="Player" parent="." instance=ExtResource("2_ti3gh")]
