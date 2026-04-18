@@ -12,7 +12,7 @@ var smoked: bool = false
 var alive: bool = true
 var punchRight: bool = true
 
-static var selectedItem: InventoryManager.Items = InventoryManager.Items.SmokeBomb
+static var selectedItem: InventoryManager.Items = InventoryManager.Items.Knife
 
 func _init():
 	PlayerManager.Instance.ConnectPlayer(self)
@@ -38,12 +38,12 @@ func InputChecker():
 	if Input.is_action_pressed("Throw") and attack_ready:
 		ThrowItem()
 	var items = InventoryManager.Items
-	if Input.is_action_just_pressed("Select_1"):
-		selectedItem = items.SmokeBomb
-	if Input.is_action_just_pressed("Select_2"):
-		selectedItem = items.Lure
-	if Input.is_action_just_pressed("Select_3"):
-		selectedItem = items.Knife
+	#if Input.is_action_just_pressed("Select_1"):
+		#selectedItem = items.SmokeBomb
+	#if Input.is_action_just_pressed("Select_2"):
+		#selectedItem = items.Knife
+	#if Input.is_action_just_pressed("Select_3"):
+		#selectedItem = items.Knife
 
 func Attack():
 	attack_ready = false

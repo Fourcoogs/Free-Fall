@@ -21,7 +21,7 @@ position = Vector2(2009, -104)
 script = null
 
 [node name="Player" parent="." instance=ExtResource("1_j8wba")]
-position = Vector2(2294, 1014)
+position = Vector2(60, -7)
 
 [node name="Waypoint" parent="." node_paths=PackedStringArray("nextWaypoint") instance=ExtResource("5_pml6m")]
 position = Vector2(1070, -17)
