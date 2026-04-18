@@ -1,6 +1,6 @@
 [gd_scene load_steps=47 format=3 uid="uid://dwlqeho6yk116"]
 
-[ext_resource type="Script" uid="uid://yb476lm0rjvr" path="res://Game Assets/Enemies/basic_enemy.gd" id="1_4nkl6"]
+[ext_resource type="Script" uid="uid://yb476lm0rjvr" path="res://Game Assets/basic_enemy.gd" id="1_4nkl6"]
 [ext_resource type="PackedScene" uid="uid://brp1i1m1potpk" path="res://Game Assets/Projectiles/bullet.tscn" id="2_3llkx"]
 [ext_resource type="Texture2D" uid="uid://bbdkwwl1urhsa" path="res://Art Assets/Gun_Guard_Aim.png" id="2_13w68"]
 [ext_resource type="Texture2D" uid="uid://pqmmhybry1cb" path="res://Art Assets/Gun_Guard_Dead.png" id="3_1wm7o"]

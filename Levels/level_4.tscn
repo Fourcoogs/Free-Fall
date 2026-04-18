@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjb5821er0lim"]
+
+[ext_resource type="PackedScene" uid="uid://d2osnvddukbwh" path="res://Levels/level_3.tscn" id="1_ftfcu"]
+[ext_resource type="Texture2D" uid="uid://b2gwswirhqgwi" path="res://Art Assets/Autumn_Tied.png" id="2_e78ah"]
+
+[node name="level_3" instance=ExtResource("1_ftfcu")]
+
+[node name="AutumnTied" type="Sprite2D" parent="." index="2"]
+position = Vector2(150, 261)
+texture = ExtResource("2_e78ah")
