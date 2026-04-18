@@ -62,11 +62,11 @@ func Patrol():
 				isMoving = false
 				return
 			if pathCompleted:
-				print("destination reached")
+				#print("destination reached")
 				currentWaypoint = currentWaypoint.nextWaypoint
 				pathCompleted = false
 			else:
-				print("plotting")
+				#print("plotting")
 				currentPath = Level.Instance.PlotToPosition(position, currentWaypoint.position)
 				target = Level.Instance.MapToLocal(currentPath[0])
 
@@ -161,7 +161,7 @@ func PlayerSearch():
 	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position, 1 << 1)
 	var result = space_state.intersect_ray(query)
 	if !result && !smoked && player.smoked == false:
-		print("targetAcquired")
+		#print("targetAcquired")
 		if aiState == states.Patrol:
 			ChangeState(states.Alert)
 		if aiState == states.Hunt:

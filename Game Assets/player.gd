@@ -96,3 +96,4 @@ func damage(amount: int):
 		health -= amount
 		if health <= 0:
 			alive = false
+			$AnimatedSprite2D.play("Dead")
