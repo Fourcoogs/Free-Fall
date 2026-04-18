@@ -18,10 +18,10 @@ func _ready():
 	tileMap = $TileMapLayer
 	grid = AStarGrid2D.new()
 	var usedRect = tileMap.get_used_rect()
-	grid.region = Rect2i(Vector2i.ZERO, usedRect.size * 0.32)
+	grid.region = usedRect
 	#grid.offset = usedRect.position
 	grid.cell_size = Vector2i(32, 32)
-	grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_MAX
+	grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
 	grid.update()
 	var coords = tileMap.get_used_cells()
 	for i in coords:
@@ -29,6 +29,7 @@ func _ready():
 		if data.get_custom_data("BlockNav"):
 			#print("setting solid")
 			grid.set_point_solid(i)
+			#tileMap.set_cell(i, 6, Vector2i(3, 0))
 		#print(i, grid.is_point_solid(i))
 	#OnGridReady.emit(tileMap, grid)
 

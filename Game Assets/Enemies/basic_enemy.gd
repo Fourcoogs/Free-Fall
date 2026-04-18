@@ -14,6 +14,8 @@ var pathCompleted: bool
 var target: Vector2
 var isMoving: bool = false
 var player: Node2D
+var playerInView: bool = false
+var canAttack: bool = true
 
 enum states
 {
@@ -47,6 +49,8 @@ func _process(delta: float) -> void:
 			Attack()
 		states.Downed:
 			pass
+	if playerInView:
+		PlayerSearch()
 
 func Patrol():
 	if isMoving:
@@ -67,13 +71,25 @@ func Alert():
 	look_at(player.position)
 
 func Hunt():
-	pass
+	currentPath = Level.Instance.PlotToPosition(position, player.position)
 
 func Attack():
-	pass
+	look_at(player.position)
+	if canAttack:
+		FireAttack()
+
+func FireAttack():
+	print("pew!")
+	canAttack = false
+	$AttackTimer.start()
+func ReadyAttack():
+	canAttack = true
 
 func ChangeState(newState: states):
+	currentPath.clear()
 	aiState = newState
+	$AnimatedSprite2D.play("Walking")
+	$SearchTimer.stop()
 	match newState:
 		states.Patrol:
 			if isMoving:
@@ -81,15 +97,20 @@ func ChangeState(newState: states):
 				target = Level.Instance.MapToLocal(currentPath[0])
 				currentSpeed = patrolSpeed
 		states.Alert:
-			currentPath.clear()
 			$AlertArrow.play()
 			$AnimatedSprite2D.pause()
 			pass
 		states.Hunt:
+			$SearchTimer.start()
+			currentSpeed = huntSpeed
 			pass
+		states.Attack:
+			$AnimatedSprite2D.play("FiringAttack")
 
 func AlertFinished():
 	ChangeState(states.Hunt)
+func ReturnToPatrol():
+	ChangeState(states.Patrol)
 
 func damage(amount, type, angle):
 	health -= amount
@@ -97,14 +118,26 @@ func damage(amount, type, angle):
 		ChangeState(states.Dead)
 
 func PlayerSpotted(body: Node2D):
+	player = body
+	playerInView = true
+
+func PlayerLost(body: Node2D):
+	if (aiState == states.Attack):
+		ChangeState(states.Hunt)
+	playerInView = false
+
+func PlayerSearch():
 	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(global_position, body.global_position, 1 << 1)
+	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position, 1 << 1)
 	var result = space_state.intersect_ray(query)
 	if !result:
-		#currentPath.clear()
-		player = body
-		ChangeState(states.Alert)
-	pass
+		if aiState == states.Patrol:
+			ChangeState(states.Alert)
+		if aiState == states.Hunt:
+			ChangeState(states.Attack)
+	else:
+		if aiState == states.Attack:
+			ChangeState(states.Hunt)
 
 func Movement(delta: float):
 	if !currentPath.is_empty():
