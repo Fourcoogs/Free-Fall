@@ -29,6 +29,7 @@ animations = [{
 radius = 12.0416
 
 [node name="Player" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_w8p6e")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

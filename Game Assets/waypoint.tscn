@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b73kbmeop3uj1"]
+
+[ext_resource type="Script" uid="uid://vur6db83u3d7" path="res://waypoint.gd" id="1_pvxrs"]
+[ext_resource type="Texture2D" uid="uid://d0o05j68jpucc" path="res://icon.svg" id="2_ahc5d"]
+
+[node name="Waypoint" type="Node2D"]
+script = ExtResource("1_pvxrs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_ahc5d")
