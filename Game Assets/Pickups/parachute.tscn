@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://hs4a6tx1rsyd"]
+
+[ext_resource type="PackedScene" uid="uid://2tqblev4lfi6" path="res://Game Assets/Pickups/basic_pickup.tscn" id="1_opdfd"]
+[ext_resource type="Texture2D" uid="uid://ds065admaxwoe" path="res://Art Assets/Parachute.png" id="2_ofd5q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioja6"]
+atlas = ExtResource("2_ofd5q")
+
+[node name="Pickup" instance=ExtResource("1_opdfd")]
+itemType = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+texture = SubResource("AtlasTexture_ioja6")
