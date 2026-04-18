@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dwlqeho6yk116"]
+[gd_scene load_steps=47 format=3 uid="uid://dwlqeho6yk116"]
 
 [ext_resource type="Script" uid="uid://yb476lm0rjvr" path="res://Game Assets/Enemies/basic_enemy.gd" id="1_4nkl6"]
 [ext_resource type="PackedScene" uid="uid://brp1i1m1potpk" path="res://Game Assets/Projectiles/bullet.tscn" id="2_3llkx"]
@@ -269,6 +269,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_l3bb0"]
 radius = 12.0416
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3llkx"]
+radius = 7.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_3llkx"]
 atlas = ExtResource("7_1wm7o")
 region = Rect2(0, 64, 64, 64)
@@ -323,6 +326,14 @@ animation = &"Walking"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_l3bb0")
 
+[node name="FallArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 64
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallArea"]
+shape = SubResource("CircleShape2D_3llkx")
+
 [node name="AlertArrow" type="AnimatedSprite2D" parent="."]
 rotation = 4.71239
 sprite_frames = SubResource("SpriteFrames_ognml")
@@ -344,10 +355,14 @@ one_shot = true
 wait_time = 30.0
 one_shot = true
 
+[node name="FallTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="Area2D" to="." method="PlayerSpotted"]
 [connection signal="body_exited" from="Area2D" to="." method="PlayerLost"]
+[connection signal="body_entered" from="FallArea" to="." method="Fall"]
 [connection signal="animation_finished" from="AlertArrow" to="." method="AlertFinished"]
 [connection signal="timeout" from="SearchTimer" to="." method="ReturnToPatrol"]
 [connection signal="timeout" from="AttackTimer" to="." method="ReadyAttack"]
 [connection signal="timeout" from="StunTimer" to="." method="Recombobulate"]
 [connection signal="timeout" from="SleepTimer" to="." method="Wakeup"]
+[connection signal="timeout" from="FallTimer" to="." method="Destroy"]

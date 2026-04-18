@@ -27,7 +27,8 @@ enum states
 	Attack,
 	Stunned,
 	Downed,
-	Dead
+	Dead,
+	Falling
 }
 var aiState: states = states.Patrol
 
@@ -93,6 +94,9 @@ func FireAttack():
 func ReadyAttack():
 	canAttack = true
 
+func Falling():
+	scale = scale/1.5
+
 func ChangeState(newState: states):
 	currentPath.clear()
 	aiState = newState
@@ -124,6 +128,12 @@ func ChangeState(newState: states):
 			$SleepTimer.start()
 		states.Dead:
 			$AnimatedSprite2D.play("Dead")
+			$Polygon2D.visible = false
+			$CollisionShape2D.disabled = true
+			$Area2D.monitorable = false
+			$Area2D.monitoring = false
+		states.Falling:
+			$AnimatedSprite2D.pause()
 			$Polygon2D.visible = false
 			$CollisionShape2D.disabled = true
 			$Area2D.monitorable = false
@@ -188,3 +198,9 @@ func _physics_process(delta: float) -> void:
 
 func KillEnemy():
 	ChangeState(states.Dead)
+
+func Fall():
+	ChangeState(states.Falling)
+
+func Destroy():
+	queue_free()

@@ -59,11 +59,13 @@ var initialParachutesHeld: int = 0
 var isKeyHeld: bool = false
 signal OnKeyPickedUp
 
+var isAutumnHeld: bool = false
+
 signal OnHealPlayer
 
 enum Items
 {
-	SmokeBomb, Lure, Knife, Key, Parachute, Health
+	SmokeBomb, Lure, Knife, Key, Parachute, Health, Wife
 }
 
 func _init():
