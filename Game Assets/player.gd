@@ -70,7 +70,9 @@ func ThrowItem():
 	var instance = InventoryManager.Instance
 	var item = instance.useItem(selectedItem)
 	if item is Node2D:
-		item.velocity
+		if item is SmokeBomb:
+			#item.direction = 
+			pass
 
 func ReadyAttack():
 	attack_ready = true
