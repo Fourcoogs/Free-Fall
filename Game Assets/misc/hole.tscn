@@ -1,9 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgsadp215v3ph"]
+[gd_scene load_steps=4 format=3 uid="uid://dgsadp215v3ph"]
 
-[ext_resource type="Texture2D" uid="uid://dk2s84c1gor0" path="res://Art Assets/cloud.png" id="1_2oejb"]
+[ext_resource type="Script" path="res://Game Assets/misc/hole.gd" id="1_2risq"]
+[ext_resource type="Texture2D" uid="uid://cc0dush3o886h" path="res://Art Assets/32 pixel sprites/hole32.png" id="2_kxl5l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_grkbd"]
+size = Vector2(10, 10)
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_2risq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(260, 109)
-texture = ExtResource("1_2oejb")
+position = Vector2(16, 16)
+texture = ExtResource("2_kxl5l")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(16, 15)
+shape = SubResource("RectangleShape2D_grkbd")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
