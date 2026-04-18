@@ -99,6 +99,25 @@ func GetItem(type: Items):
 			OnHealPlayer.emit()
 			return true
 
+func UseItem(type: Items):
+	match type:
+		Items.SmokeBomb:
+			if smokeBombsHeld > 0:
+				smokeBombsHeld -= 1
+				return true
+			return false
+		Items.Lure:
+			if luresHeld > 0:
+				luresHeld -= 1
+				return true
+			return false
+		Items.Knife:
+			if knivesHeld > 0:
+				knivesHeld -= 1
+				return true
+			return false
+	return false
+
 func ResetItems():
 	smokeBombsHeld = initialSmokeBombsHeld
 	luresHeld = initialLuresHeld

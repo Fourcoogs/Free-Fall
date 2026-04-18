@@ -9,8 +9,6 @@ extends CharacterBody2D
 var currentSpeed: float
 var alive: bool = true
 
-var tileMap: TileMapLayer
-var grid: AStarGrid2D
 var currentPath: Array
 var isMoving: bool = false
 
@@ -29,12 +27,7 @@ var aiState: states = states.Patrol
 func _ready():
 	if (is_instance_valid(currentWaypoint)):
 		isMoving = true
-	Level.Instance.OnGridReady.connect(GetTileAndGrid)
 	pass
-	
-func GetTileAndGrid(tilemap, aStarGrid):
-	tileMap = tilemap
-	grid = aStarGrid
 
 func _process(delta: float) -> void:
 	match aiState:
@@ -59,7 +52,7 @@ func Patrol():
 				currentWaypoint = currentWaypoint.nextWaypoint
 			else:
 				print("plotting")
-				currentPath = PlotToPosition(currentWaypoint.position)
+				currentPath = Level.Instance.PlotToPosition(position, currentWaypoint.position)
 
 func Hunt():
 	pass
@@ -72,11 +65,8 @@ func ChangeState(newState: states):
 	match newState:
 		states.Patrol:
 			if isMoving:
-				currentPath = PlotToPosition(currentWaypoint.position)
+				currentPath = Level.Instance.PlotToPosition(position, currentWaypoint.position)
 				currentSpeed = patrolSpeed
-
-func PlotToPosition(newPosition: Vector2):
-	return grid.get_id_path(tileMap.local_to_map(position),tileMap.local_to_map(newPosition))
 
 func damage(amount, type, angle):
 	health -= amount
@@ -85,9 +75,11 @@ func damage(amount, type, angle):
 
 func Movement(delta: float):
 	if !currentPath.is_empty():
-		var target = tileMap.map_to_local(currentPath[0])
-		global_position = global_position.move_toward(target, currentSpeed * delta)
-		if (global_position == target):
+		#print("path is not empty")
+		var target: Vector2 = Level.Instance.MapToLocal(currentPath[0])
+		position = target #position.move_toward(target, currentSpeed * delta)
+		velocity = position * currentSpeed * delta
+		if (position == target):
 			currentPath.pop_front()
 	pass
 
