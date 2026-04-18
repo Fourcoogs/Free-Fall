@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://2tqblev4lfi6"]
 
-[ext_resource type="Script" uid="uid://ciwerrlkolw35" path="res://Game Assets/Pickups/Pickup.gd" id="2_y36aa"]
+[ext_resource type="Script" path="res://Game Assets/Pickups/Pickup.gd" id="2_y36aa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s36bd"]
 radius = 16.0312

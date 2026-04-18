@@ -15,6 +15,7 @@ func _init():
 	_instance = self
 
 func _ready():
+	AudioManager.play()
 	tileMap = $TileMapLayer
 	grid = AStarGrid2D.new()
 	var usedRect = tileMap.get_used_rect()
