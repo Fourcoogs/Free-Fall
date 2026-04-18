@@ -1,16 +1,33 @@
 extends Node
+class_name LevelManager
 
-static var _instance: InventoryManager
-static var Instance: InventoryManager:
+var currentLevel = 0
+var preloadedLevelArray = null
+
+static var _instance: LevelManager
+static var Instance: LevelManager:
 	get:
 		if _instance == null:
-			_instance = InventoryManager.new()
+			_instance = LevelManager.new()
 		return _instance
-		
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
+func _init():
+	if _instance != null && _instance != self:
+		queue_free()
+	else:
+		_instance = self
+		
+func _ready() -> void:
+	pass#LEVEL_1_SCENE = preload("res://Levels/level_2.tscn")
+
+func nextLevel():
+	preloadedLevelArray = ["res://Levels/level_1.tscn",
+	"res://Levels/level_2.tscn"]
+	
+	currentLevel = currentLevel + 1
+	
+	if currentLevel >= 0 and currentLevel < preloadedLevelArray.size():
+		Engine.get_main_loop().change_scene_to_file(preloadedLevelArray[currentLevel])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

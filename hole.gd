@@ -14,5 +14,5 @@ func _process(delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	#KingAnimation.fall()
-	await get_tree().create_timer(1).timeout
-	
+	await get_tree().create_timer(0.2).timeout
+	LevelManager.Instance.nextLevel()
