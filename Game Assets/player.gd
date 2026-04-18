@@ -28,6 +28,8 @@ func HealPlayer():
 	health += 1
 
 func _process(delta: float) -> void:
+	if Input.is_action_pressed("Reset"):
+		LevelManager.Instance.Reset()
 	if alive:
 		look_at(get_global_mouse_position())
 		InputChecker()
