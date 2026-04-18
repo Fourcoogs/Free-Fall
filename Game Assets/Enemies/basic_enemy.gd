@@ -30,6 +30,7 @@ enum states
 var aiState: states = states.Patrol
 
 func _ready():
+	player = PlayerManager.Instance.currentPlayer
 	if (is_instance_valid(currentWaypoint)):
 		isMoving = true
 	currentSpeed = patrolSpeed
@@ -82,6 +83,7 @@ func FireAttack():
 	print("pew!")
 	canAttack = false
 	$AttackTimer.start()
+
 func ReadyAttack():
 	canAttack = true
 
@@ -90,6 +92,8 @@ func ChangeState(newState: states):
 	aiState = newState
 	$AnimatedSprite2D.play("Walking")
 	$SearchTimer.stop()
+	$StunTimer.stop()
+	$SleepTimer.stop()
 	match newState:
 		states.Patrol:
 			if isMoving:
@@ -106,16 +110,29 @@ func ChangeState(newState: states):
 			pass
 		states.Attack:
 			$AnimatedSprite2D.play("FiringAttack")
+		states.Stunned:
+			$AnimatedSprite2D.play("Stun")
+			$StunTimer.start()
+		states.Downed:
+			$AnimatedSprite2D.play("Downed")
+			$SleepTimer.start()
 
 func AlertFinished():
 	ChangeState(states.Hunt)
 func ReturnToPatrol():
 	ChangeState(states.Patrol)
+func Recombobulate():
+	ChangeState(states.Hunt)
+func Wakeup():
+	health = 3
+	ReturnToPatrol()
 
-func damage(amount, type, angle):
+func damage(amount):
 	health -= amount
 	if health <= 0:
-		ChangeState(states.Dead)
+		ChangeState(states.Downed)
+	else:
+		ChangeState(states.Stunned)
 
 func PlayerSpotted(body: Node2D):
 	player = body

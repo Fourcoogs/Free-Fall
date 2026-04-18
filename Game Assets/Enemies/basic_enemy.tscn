@@ -298,7 +298,7 @@ animations = [{
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 7
+collision_mask = 23
 motion_mode = 1
 script = ExtResource("1_4nkl6")
 
@@ -331,9 +331,20 @@ wait_time = 10.0
 one_shot = true
 
 [node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StunTimer" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
+
+[node name="SleepTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
 
 [connection signal="body_entered" from="Area2D" to="." method="PlayerSpotted"]
 [connection signal="body_exited" from="Area2D" to="." method="PlayerLost"]
 [connection signal="animation_finished" from="AlertArrow" to="." method="AlertFinished"]
 [connection signal="timeout" from="SearchTimer" to="." method="ReturnToPatrol"]
 [connection signal="timeout" from="AttackTimer" to="." method="ReadyAttack"]
+[connection signal="timeout" from="StunTimer" to="." method="Recombobulate"]
+[connection signal="timeout" from="SleepTimer" to="." method="Wakeup"]
