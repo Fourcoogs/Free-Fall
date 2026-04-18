@@ -16,15 +16,21 @@ func _init():
 
 func _ready():
 	grid = AStarGrid2D.new()
-	grid.region = tileMap.get_used_rect()
-	grid.cell_size = Vector2i(32, 32)
+	var usedRect = tileMap.get_used_rect()
+	grid.region = usedRect
+	#grid.offset = usedRect.position
+	grid.cell_size = Vector2i(100, 100)
 	grid.update()
-	OnGridReady.emit(tileMap, grid)
+	#OnGridReady.emit(tileMap, grid)
 
 func PlotToPosition(currentPosition:Vector2, newPosition: Vector2):
-	return grid.get_id_path(tileMap.local_to_map(position),tileMap.local_to_map(newPosition))
+	var returnable: Array = grid.get_id_path(tileMap.local_to_map(currentPosition),tileMap.local_to_map(newPosition))
+	returnable.pop_front()
+	print(returnable)
+	return returnable
 
 func MapToLocal(vector: Vector2i):
+	print(str(vector))
 	return tileMap.map_to_local(vector)
 
 func LocalToMap(vector: Vector2):

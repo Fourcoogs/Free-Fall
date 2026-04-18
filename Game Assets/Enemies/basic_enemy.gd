@@ -2,14 +2,16 @@ class_name Enemy
 extends CharacterBody2D
 
 @export var health: int = 3
-@export var patrolSpeed: float = 5000
-@export var huntSpeed: float = 9000
+@export var patrolSpeed: float = 50
+@export var huntSpeed: float = 90
 @export var currentWaypoint: Waypoint
 
 var currentSpeed: float
 var alive: bool = true
 
 var currentPath: Array
+var pathCompleted: bool
+var target: Vector2
 var isMoving: bool = false
 
 enum states
@@ -27,6 +29,7 @@ var aiState: states = states.Patrol
 func _ready():
 	if (is_instance_valid(currentWaypoint)):
 		isMoving = true
+	currentSpeed = patrolSpeed
 	pass
 
 func _process(delta: float) -> void:
@@ -48,11 +51,14 @@ func Patrol():
 			if !is_instance_valid(currentWaypoint):
 				isMoving = false
 				return
-			if currentWaypoint.global_position == global_position:
+			if pathCompleted:
+				print("destination reached")
 				currentWaypoint = currentWaypoint.nextWaypoint
+				pathCompleted = false
 			else:
 				print("plotting")
 				currentPath = Level.Instance.PlotToPosition(position, currentWaypoint.position)
+				target = Level.Instance.MapToLocal(currentPath[0])
 
 func Hunt():
 	pass
@@ -66,6 +72,7 @@ func ChangeState(newState: states):
 		states.Patrol:
 			if isMoving:
 				currentPath = Level.Instance.PlotToPosition(position, currentWaypoint.position)
+				target = Level.Instance.MapToLocal(currentPath[0])
 				currentSpeed = patrolSpeed
 
 func damage(amount, type, angle):
@@ -76,16 +83,45 @@ func damage(amount, type, angle):
 func Movement(delta: float):
 	if !currentPath.is_empty():
 		#print("path is not empty")
-		var target: Vector2 = Level.Instance.MapToLocal(currentPath[0])
-		position = target #position.move_toward(target, currentSpeed * delta)
-		velocity = position * currentSpeed * delta
+		#var target: Vector2 = Level.Instance.MapToLocal(currentPath[0])
+		#print (str(position) + " -> " + str(position.move_toward(target, currentSpeed * delta)) + " => " + str(target))
+		position = position.move_toward(target, currentSpeed * delta)
 		if (position == target):
 			currentPath.pop_front()
+			if currentPath.is_empty():
+				pathCompleted = true
+				return
+			target = Level.Instance.MapToLocal(currentPath[0])
 	pass
 
 func HuntMovement(delta: float):
 	push_error("HuntMovement not programmed")
 	pass
+
+#func CustomMoveToward(target: Vector2, speed: float):
+	#if position == target:
+		#return
+	#var direction = position.direction_to(target)
+	#var lower: bool = false
+	#var righter: bool = false
+	#if position.x > target.x:
+		#righter = true
+	#if position.y > target.y:
+		#lower = true
+	#position += direction * speed
+	#if lower:
+		#if position.y <= target.y:
+			#position.y = target.y
+	#else:
+		#if position.y >= target.y:
+			#position.y = target.y
+	#if righter:
+		#if position.x <= target.x:
+			#position.x = target.x
+	#else:
+		#if position.x >= target.x:
+			#position.x = target.x 
+	#pass
 
 func _physics_process(delta: float) -> void:
 	Movement(delta)
