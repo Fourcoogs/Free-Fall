@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=4 uid="uid://bq1n50cbqxt2k"]
 
-[ext_resource type="Script" uid="uid://bn0vssxrdqt0j" path="res://Game Assets/Level.gd" id="1_fbld2"]
+[ext_resource type="Script" path="res://Game Assets/Level.gd" id="1_fbld2"]
 [ext_resource type="PackedScene" uid="uid://ciofm4eq47ovj" path="res://Game Assets/player.tscn" id="1_j8wba"]
 [ext_resource type="PackedScene" uid="uid://dgsadp215v3ph" path="res://hole.tscn" id="2_pv3pd"]
 [ext_resource type="PackedScene" uid="uid://xhcohltgmtnr" path="res://tile_map_layer.tscn" id="2_s275v"]
@@ -77,58 +77,58 @@ currentWaypoint = NodePath("../Waypoint11")
 
 [node name="Enemy2" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(543, 913)
-rotation = -0.9250245
+rotation = -0.925025
 
 [node name="Enemy3" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(706, 915)
-rotation = -1.5097098
+rotation = -1.50971
 
 [node name="Enemy4" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(629, 911)
-rotation = -1.2653637
+rotation = -1.26536
 
 [node name="Enemy5" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(886, 919)
-rotation = -2.2026055
+rotation = -2.20261
 
 [node name="Enemy6" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(802, 915)
-rotation = -1.813397
+rotation = -1.8134
 
 [node name="Enemy7" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(584, 847)
-rotation = -1.0367255
+rotation = -1.03673
 
 [node name="Enemy8" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(667, 840)
-rotation = -1.4241886
+rotation = -1.42419
 
 [node name="Enemy9" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(764, 849)
-rotation = -1.813397
+rotation = -1.8134
 
 [node name="Enemy10" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(856, 862)
-rotation = -2.073451
+rotation = -2.07345
 
 [node name="Enemy11" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(532, 793)
-rotation = -0.7766715
+rotation = -0.776672
 
 [node name="Enemy12" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(642, 791)
 
 [node name="Enemy13" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(727, 795)
-rotation = -1.813397
+rotation = -1.8134
 
 [node name="Enemy14" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(815, 802)
-rotation = -1.9425515
+rotation = -1.94255
 
 [node name="Enemy15" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(912, 802)
-rotation = -2.4609141
+rotation = -2.46091
 
 [node name="Enemy16" parent="." node_paths=PackedStringArray("currentWaypoint") instance=ExtResource("6_vltsr")]
 position = Vector2(704, 671)
@@ -147,7 +147,7 @@ position = Vector2(1580, 964)
 
 [node name="Enemy20" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(1625, 964)
-rotation = -3.1084313
+rotation = -3.10843
 
 [node name="Food" parent="." instance=ExtResource("7_vltsr")]
 position = Vector2(46, 698)
@@ -175,7 +175,7 @@ position = Vector2(3264, 909)
 
 [node name="Enemy21" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(3299, 905)
-rotation = -3.106686
+rotation = -3.10669
 
 [node name="Knife2" parent="." instance=ExtResource("9_vltsr")]
 position = Vector2(3221, 757)
@@ -190,12 +190,12 @@ position = Vector2(3250, 788)
 position = Vector2(3157, 1186)
 
 [node name="Enemy24" parent="." instance=ExtResource("6_vltsr")]
-position = Vector2(3196, 1096.9999)
-rotation = -1.553343
+position = Vector2(3196, 1097)
+rotation = -1.55334
 
 [node name="Enemy25" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(3199, 1009)
-rotation = 1.5550884
+rotation = 1.55509
 
 [node name="Enemy26" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(3283, 1059)
@@ -226,22 +226,22 @@ nextWaypoint = NodePath("../Waypoint14")
 
 [node name="Enemy29" parent="." instance=ExtResource("6_vltsr")]
 position = Vector2(2491, 461)
-rotation = -1.5550884
+rotation = -1.55509
 
 [node name="Key2" parent="." instance=ExtResource("8_rp5ft")]
 position = Vector2(2035, 106)
 
 [node name="Enemy30" parent="." instance=ExtResource("6_vltsr")]
-position = Vector2(2026, 131.00006)
-rotation = 1.0821041
+position = Vector2(2026, 131)
+rotation = 1.0821
 
 [node name="Enemy31" parent="." node_paths=PackedStringArray("currentWaypoint") instance=ExtResource("6_vltsr")]
 position = Vector2(2782, 435)
 currentWaypoint = NodePath("../Waypoint17")
 
 [node name="Enemy32" parent="." instance=ExtResource("6_vltsr")]
-position = Vector2(3107.9998, 204)
-rotation = 1.579523
+position = Vector2(3108, 204)
+rotation = 1.57952
 
 [node name="Enemy33" parent="." node_paths=PackedStringArray("currentWaypoint") instance=ExtResource("6_vltsr")]
 position = Vector2(2915, 130)
@@ -260,7 +260,7 @@ position = Vector2(3390, 295)
 currentWaypoint = NodePath("../Waypoint21")
 
 [node name="Enemy37" parent="." instance=ExtResource("6_vltsr")]
-position = Vector2(3532.9998, -84)
+position = Vector2(3533, -84)
 rotation = -3.49764
 
 [node name="Knife4" parent="." instance=ExtResource("9_vltsr")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://ding1070djje3"]
+[gd_scene load_steps=17 format=4 uid="uid://ding1070djje3"]
 
 [ext_resource type="PackedScene" uid="uid://dgsadp215v3ph" path="res://hole.tscn" id="1_kod2e"]
 [ext_resource type="PackedScene" uid="uid://ciofm4eq47ovj" path="res://Game Assets/player.tscn" id="2_04rj8"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://covuhoql67q4p" path="res://Game Assets/Pickups/knife.tscn" id="14_eav5j"]
 [ext_resource type="Texture2D" uid="uid://cc1aqko8ldmkk" path="res://Game Assets/Pickups/lunch.png" id="14_ih2ar"]
 [ext_resource type="Texture2D" uid="uid://uu2754ymb3g0" path="res://Art Assets/LEFTCLICK.png" id="15_6o814"]
+[ext_resource type="Texture2D" uid="uid://h51a5dk3k1oc" path="res://Art Assets/RIGHTCLICK2.png" id="16_2xx4y"]
 
 [node name="level_1" type="Node2D"]
 script = ExtResource("10_ix01y")
@@ -357,7 +358,7 @@ rotation = 3.14159
 position = Vector2(799, 545)
 
 [node name="Knife" parent="." instance=ExtResource("14_eav5j")]
-position = Vector2(2181, 193)
+position = Vector2(1781, 289)
 
 [node name="Knife2" parent="." instance=ExtResource("14_eav5j")]
 position = Vector2(1478, -254)
@@ -391,3 +392,15 @@ texture = ExtResource("11_vbcof")
 position = Vector2(2968, 607)
 scale = Vector2(0.58901, 0.58642)
 texture = ExtResource("15_6o814")
+
+[node name="Enemy18" parent="." instance=ExtResource("5_a610a")]
+position = Vector2(2052, 479)
+rotation = -1.5708
+
+[node name="Knife5" parent="." instance=ExtResource("14_eav5j")]
+position = Vector2(2182, 193)
+
+[node name="Rightclick2" type="Sprite2D" parent="."]
+position = Vector2(1778, 147)
+scale = Vector2(0.445625, 0.448438)
+texture = ExtResource("16_2xx4y")

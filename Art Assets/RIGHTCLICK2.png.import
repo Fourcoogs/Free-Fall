@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cosoi345373m3"
-path="res://.godot/imported/NPC_Part_Male.png-3c76fcbe21f2ffb7d3074291bf9ce728.ctex"
+uid="uid://h51a5dk3k1oc"
+path="res://.godot/imported/RIGHTCLICK2.png-c17cbe06a27d7198c8f11d8b74aaeecf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art Assets/NPC_Part_Male.png"
-dest_files=["res://.godot/imported/NPC_Part_Male.png-3c76fcbe21f2ffb7d3074291bf9ce728.ctex"]
+source_file="res://Art Assets/RIGHTCLICK2.png"
+dest_files=["res://.godot/imported/RIGHTCLICK2.png-c17cbe06a27d7198c8f11d8b74aaeecf.ctex"]
 
 [params]
 
