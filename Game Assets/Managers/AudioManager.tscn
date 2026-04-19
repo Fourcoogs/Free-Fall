@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dt0w0eua4wq86"]
-
-[ext_resource type="AudioStream" uid="uid://cgtlxtim6qin4" path="res://whatever/sneakyFantasy Edit 1 Export 2.mp3" id="1_ebbmu"]
+[gd_scene load_steps=2 format=3 uid="uid://dt0w0eua4wq86"]
 
 [sub_resource type="GDScript" id="GDScript_64xxj"]
 script/source = "extends AudioStreamPlayer
@@ -17,6 +15,4 @@ func _process(delta: float) -> void:
 "
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer"]
-stream = ExtResource("1_ebbmu")
-parameters/looping = true
 script = SubResource("GDScript_64xxj")

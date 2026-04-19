@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bmnfnagrbqs5n"]
 
-[ext_resource type="Script" path="res://Levels/main_menu.gd" id="1_1003y"]
+[ext_resource type="Script" uid="uid://bbsni08vkhldy" path="res://Levels/main_menu.gd" id="1_1003y"]
 [ext_resource type="Texture2D" uid="uid://b5hwi5210ipfn" path="res://Art Assets/mainMenu4.png" id="1_kot73"]
 [ext_resource type="Texture2D" uid="uid://dct4b068i1c24" path="res://Art Assets/Start_Button2.png" id="3_3dvq6"]
 [ext_resource type="AudioStream" uid="uid://to081g04rhqs" path="res://whatever/mainMenuMusic.mp3" id="4_xcdta"]

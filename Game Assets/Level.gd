@@ -6,6 +6,7 @@ static var Instance: Level:
 	get:
 		return _instance
 
+@export var musicTheme: AudioStream
 var tileMap: TileMapLayer
 var grid: AStarGrid2D
 
@@ -15,7 +16,9 @@ func _init():
 	_instance = self
 
 func _ready():
-	AudioManager.play()
+	if musicTheme != null:
+		AudioManager.stream = musicTheme
+		AudioManager.play()
 	tileMap = $TileMapLayer
 	grid = AStarGrid2D.new()
 	var usedRect = tileMap.get_used_rect()
@@ -37,11 +40,11 @@ func _ready():
 func PlotToPosition(currentPosition:Vector2, newPosition: Vector2):
 	var returnable: Array = grid.get_id_path(tileMap.local_to_map(currentPosition),tileMap.local_to_map(newPosition))
 	returnable.pop_front()
-	print(returnable)
+	#print(returnable)
 	return returnable
 
 func MapToLocal(vector: Vector2i):
-	print(str(vector))
+	#print(str(vector))
 	return to_global(tileMap.map_to_local(vector))
 
 func LocalToMap(vector: Vector2):

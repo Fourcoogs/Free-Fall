@@ -129,18 +129,22 @@ func ChangeState(newState: states):
 		states.Dead:
 			$AnimatedSprite2D.play("Dead")
 			$Polygon2D.visible = false
-			$CollisionShape2D.disabled = true
+			$CollisionShape2D.set_deferred("disabled", true)
 			$Area2D.monitorable = false
 			$Area2D.monitoring = false
 		states.Falling:
 			$AnimatedSprite2D.pause()
 			$Polygon2D.visible = false
-			$CollisionShape2D.disabled = true
+			$CollisionShape2D.set_deferred("disabled", true)
 			$Area2D.monitorable = false
 			$Area2D.monitoring = false
 
 func AlertFinished():
-	ChangeState(states.Hunt)
+	match aiState:
+		states.Stunned, states.Downed, states.Dead, states.Falling:
+			return
+		_:
+			ChangeState(states.Hunt)
 func ReturnToPatrol():
 	ChangeState(states.Patrol)
 func Recombobulate():
@@ -168,8 +172,10 @@ func PlayerLost(body: Node2D):
 func PlayerSearch():
 	#print("searching")
 	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position, 1 << 1)
+	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position, 1 << 1 || 1 << 5)
 	var result = space_state.intersect_ray(query)
+	if result:
+		pass
 	if !result && !smoked && player.smoked == false:
 		#print("targetAcquired")
 		if aiState == states.Patrol:
