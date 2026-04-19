@@ -161,7 +161,6 @@ func damage(amount):
 		ChangeState(states.Stunned)
 
 func PlayerSpotted(body: Node2D):
-	player = body
 	playerInView = true
 
 func PlayerLost(body: Node2D):
@@ -171,11 +170,12 @@ func PlayerLost(body: Node2D):
 
 func PlayerSearch():
 	#print("searching")
-	var space_state = get_world_2d().direct_space_state
-	var query = PhysicsRayQueryParameters2D.create(global_position, player.global_position, 1 << 1 || 1 << 5)
-	var result = space_state.intersect_ray(query)
-	if result:
-		pass
+	$RayCast2D.target_position = player.global_position - $RayCast2D.global_position
+	$RayCast2D.force_raycast_update()
+	var result = $RayCast2D.is_colliding()
+	#print(result)
+	#if result:
+		#$RayCast2D.get_collider().queue_free()
 	if !result && !smoked && player.smoked == false:
 		#print("targetAcquired")
 		if aiState == states.Patrol:
