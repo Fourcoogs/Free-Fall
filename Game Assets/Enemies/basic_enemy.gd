@@ -96,7 +96,7 @@ func ReadyAttack():
 
 func Falling():
 	#print("FREE-FALLING")
-	scale *= Vector2.ONE - Vector2(0.25, 0.25) * get_process_delta_time()
+	scale *= Vector2.ONE - Vector2.ONE * get_process_delta_time()
 	if scale.x <= 0.1:
 		queue_free()
 
@@ -201,6 +201,8 @@ func Movement(delta: float):
 
 func _physics_process(delta: float) -> void:
 	var drag: float = 10
+	if (aiState == states.Falling):
+		drag = 1
 	velocity *= 1.0 - drag * delta
 	Movement(delta)
 	move_and_slide()

@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 		look_at(get_global_mouse_position())
 		InputChecker()
 	if falling:
-		scale *= Vector2.ONE - Vector2(0.25, 0.25) * delta
+		scale *= Vector2.ONE - Vector2.ONE * delta
 		if scale.x <= 0.1:
 			visible = false
 			falling = false
@@ -118,3 +118,5 @@ func damage(amount: int):
 func Fall(_body: Node2D):
 	falling = true
 	alive = false
+	$AnimatedSprite2D.play("Falling")
+	$AnimatedSprite2D.rotation_degrees += 180.0
