@@ -51,8 +51,8 @@ func _process(delta: float) -> void:
 			Hunt()
 		states.Attack:
 			Attack()
-		states.Downed:
-			pass
+		states.Falling:
+			Falling()
 	if playerInView:
 		PlayerSearch()
 
@@ -95,7 +95,10 @@ func ReadyAttack():
 	canAttack = true
 
 func Falling():
-	scale = scale/1.5
+	#print("FREE-FALLING")
+	scale *= Vector2.ONE - Vector2(0.25, 0.25) * get_process_delta_time()
+	if scale.x <= 0.1:
+		queue_free()
 
 func ChangeState(newState: states):
 	currentPath.clear()
@@ -130,14 +133,12 @@ func ChangeState(newState: states):
 			$AnimatedSprite2D.play("Dead")
 			$Polygon2D.visible = false
 			$CollisionShape2D.set_deferred("disabled", true)
-			$Area2D.monitorable = false
-			$Area2D.monitoring = false
+			$Area2D.set_deferred("disabled", true)
 		states.Falling:
 			$AnimatedSprite2D.pause()
 			$Polygon2D.visible = false
 			$CollisionShape2D.set_deferred("disabled", true)
-			$Area2D.monitorable = false
-			$Area2D.monitoring = false
+			$Area2D.set_deferred("disabled", true)
 
 func AlertFinished():
 	match aiState:
@@ -199,13 +200,15 @@ func Movement(delta: float):
 	pass
 
 func _physics_process(delta: float) -> void:
+	var drag: float = 10
+	velocity *= 1.0 - drag * delta
 	Movement(delta)
 	move_and_slide()
 
 func KillEnemy():
 	ChangeState(states.Dead)
 
-func Fall():
+func Fall(_body: Node2D):
 	ChangeState(states.Falling)
 
 func Destroy():

@@ -11,6 +11,7 @@ var attack_ready: bool = true
 var smoked: bool = false
 var alive: bool = true
 var punchRight: bool = true
+var falling: bool = false
 
 static var selectedItem: InventoryManager.Items = InventoryManager.Items.Knife
 
@@ -33,6 +34,11 @@ func _process(delta: float) -> void:
 	if alive:
 		look_at(get_global_mouse_position())
 		InputChecker()
+	if falling:
+		scale *= Vector2.ONE - Vector2(0.25, 0.25) * delta
+		if scale.x <= 0.1:
+			visible = false
+			falling = false
 
 func InputChecker():
 	if Input.is_action_pressed("Attack") and attack_ready:
@@ -65,7 +71,7 @@ func PunchLands(body: Node2D):
 		DeactivatePunch()
 		$PunchDuration.stop()
 		body.damage(1)
-		#body.position += Vector2(cos(rotation), sin(rotation)) * 20
+		body.velocity += Vector2(cos(rotation), sin(rotation)) * 200
 	pass
 
 func DeactivatePunch():
@@ -98,6 +104,8 @@ func movement_method(delta):
 
 func _physics_process(delta: float) -> void:
 	movement_method(delta)
+	if !alive:
+		velocity *= 1.0 - 5 * delta
 	move_and_slide()
 
 func damage(amount: int):
@@ -107,5 +115,6 @@ func damage(amount: int):
 			alive = false
 			$AnimatedSprite2D.play("Dead")
 
-func Fall():
-	queue_free()
+func Fall(_body: Node2D):
+	falling = true
+	alive = false

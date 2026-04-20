@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://dwlqeho6yk116"]
+[gd_scene load_steps=48 format=3 uid="uid://dwlqeho6yk116"]
 
 [ext_resource type="Script" uid="uid://yb476lm0rjvr" path="res://Game Assets/Enemies/basic_enemy.gd" id="1_4nkl6"]
 [ext_resource type="PackedScene" uid="uid://brp1i1m1potpk" path="res://Game Assets/Projectiles/bullet.tscn" id="2_3llkx"]
@@ -300,6 +300,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_sbnyc"]
+radius = 2.0
+
 [node name="Enemy" type="CharacterBody2D"]
 disable_mode = 2
 collision_layer = 4
@@ -359,6 +362,8 @@ one_shot = true
 [node name="FallTimer" type="Timer" parent="."]
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+editor_description = "Literally just here to keep the RayCast stationary following the parent node.  
+\"Why not just turn off top_level on the RayCast2D?\" Because then the RayCast2D would rotate with the parent and break."
 remote_path = NodePath("../RayCast2D")
 update_rotation = false
 update_scale = false
@@ -370,6 +375,13 @@ collision_mask = 34
 hit_from_inside = true
 collide_with_areas = true
 
+[node name="FallArea2" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallArea2"]
+shape = SubResource("CircleShape2D_sbnyc")
+
 [connection signal="body_entered" from="Area2D" to="." method="PlayerSpotted"]
 [connection signal="body_exited" from="Area2D" to="." method="PlayerLost"]
 [connection signal="body_entered" from="FallArea" to="." method="Fall"]
@@ -379,3 +391,4 @@ collide_with_areas = true
 [connection signal="timeout" from="StunTimer" to="." method="Recombobulate"]
 [connection signal="timeout" from="SleepTimer" to="." method="Wakeup"]
 [connection signal="timeout" from="FallTimer" to="." method="Destroy"]
+[connection signal="body_entered" from="FallArea2" to="." method="Fall"]
